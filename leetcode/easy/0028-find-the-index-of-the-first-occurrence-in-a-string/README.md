@@ -37,9 +37,9 @@ Explanation: "leeto" did not occur in "leetcode", so we return -1.
 ## Solution
 
 **Language:** Java  
-**Runtime:** 0 ms  
-**Memory:** 42.6 MB  
-**Submitted:** 2026-06-24T18:06:30.347Z  
+**Runtime:** 0 ms (beats 100.00%)  
+**Memory:** 43 MB (beats 51.61%)  
+**Submitted:** 2026-06-24T18:06:40.092Z  
 
 ```java
 class Solution {
