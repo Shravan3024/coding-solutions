@@ -1,30 +1,39 @@
-import java.util.*;
-
 class Solution {
     public List<String> summaryRanges(int[] nums) {
-        List<String> result = new ArrayList<>();
-
+        
+        List<String> res = new ArrayList<>();
+    
         int i = 0;
+        int first;
+        int last;
+        StringBuilder s = new StringBuilder();
 
-        while (i < nums.length) {
+        while( i < nums.length){
+            first = nums[i];
+            int temp = first;
 
-            int start = nums[i];
-
-            while (i < nums.length - 1 && nums[i] + 1 == nums[i + 1]) {
-                i++;
+            while( ++i < nums.length && temp+1 == nums[i])
+                temp += 1;
+            
+            last = temp;
+            
+            if( first == last )
+                s.append(first);
+            else{
+                s.append(first);
+                s.append("->");
+                s.append(last);
             }
+            res.add(s.toString());
+            s.setLength(0);
 
-            int end = nums[i];
-
-            if (start == end) {
-                result.add(String.valueOf(start));
-            } else {
-                result.add(start + "->" + end);
-            }
-
-            i++;
         }
 
-        return result;
+        return res;
     }
 }
+
+/*
+    Always use stringBuilder, instead of string
+        - This will reduce the runtime
+*/
