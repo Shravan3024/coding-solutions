@@ -54,9 +54,9 @@ Explanation: The ranges are:
 ## Solution
 
 **Language:** Java  
-**Runtime:** 3 ms  
-**Memory:** 42.7 MB  
-**Submitted:** 2026-06-28T17:13:15.545Z  
+**Runtime:** 3 ms (beats 78.62%)  
+**Memory:** 43.2 MB (beats 20.14%)  
+**Submitted:** 2026-06-28T17:13:22.808Z  
 
 ```java
 import java.util.*;
