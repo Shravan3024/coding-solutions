@@ -54,41 +54,50 @@ Explanation: The ranges are:
 ## Solution
 
 **Language:** Java  
-**Runtime:** 3 ms (beats 78.62%)  
-**Memory:** 43.2 MB (beats 20.14%)  
-**Submitted:** 2026-06-28T17:13:22.808Z  
+**Runtime:** 0 ms (beats 100.00%)  
+**Memory:** 42.8 MB (beats 84.56%)  
+**Submitted:** 2026-06-28T17:13:52.153Z  
 
 ```java
-import java.util.*;
-
 class Solution {
     public List<String> summaryRanges(int[] nums) {
-        List<String> result = new ArrayList<>();
-
+        
+        List<String> res = new ArrayList<>();
+    
         int i = 0;
+        int first;
+        int last;
+        StringBuilder s = new StringBuilder();
 
-        while (i < nums.length) {
+        while( i < nums.length){
+            first = nums[i];
+            int temp = first;
 
-            int start = nums[i];
-
-            while (i < nums.length - 1 && nums[i] + 1 == nums[i + 1]) {
-                i++;
+            while( ++i < nums.length && temp+1 == nums[i])
+                temp += 1;
+            
+            last = temp;
+            
+            if( first == last )
+                s.append(first);
+            else{
+                s.append(first);
+                s.append("->");
+                s.append(last);
             }
+            res.add(s.toString());
+            s.setLength(0);
 
-            int end = nums[i];
-
-            if (start == end) {
-                result.add(String.valueOf(start));
-            } else {
-                result.add(start + "->" + end);
-            }
-
-            i++;
         }
 
-        return result;
+        return res;
     }
 }
+
+/*
+    Always use stringBuilder, instead of string
+        - This will reduce the runtime
+*/
 ```
 
 ---
