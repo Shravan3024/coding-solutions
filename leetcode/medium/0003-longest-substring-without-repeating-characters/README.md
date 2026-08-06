@@ -45,36 +45,41 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 
 ## Solution
 
-**Language:** Python  
-**Runtime:** 273 ms (beats 20.00%)  
-**Memory:** 16.9 MB (beats 7.09%)  
-**Submitted:** 2026-08-06T07:21:21.937Z  
+**Language:** Java  
+**Runtime:** 6 ms (beats 73.43%)  
+**Memory:** 48.1 MB (beats 5.35%)  
+**Submitted:** 2026-08-06T07:22:04.574Z  
 
-```py
-class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
+```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
 
-        last_seen = [-1] * 128
+        int[] lastSeen = new int[128];
 
-        left = 0
-        max_len = 0
+        // Initialize all positions to -1
+        Arrays.fill(lastSeen, -1);
 
-        for right in range(len(s)):
+        int left = 0;
+        int maxLen = 0;
 
-            ch = ord(s[right])
+        for (int right = 0; right < s.length(); right++) {
 
-            if last_seen[ch] >= left:
-                left = last_seen[ch] + 1
+            char ch = s.charAt(right);
 
-            last_seen[ch] = right
+            // If character is inside current window,
+            // move left pointer just after its previous occurrence.
+            if (lastSeen[ch] >= left) {
+                left = lastSeen[ch] + 1;
+            }
 
-            max_len = max(max_len, right - left + 1)
+            lastSeen[ch] = right;
 
-        return max_len
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+}
 ```
 
 ---
