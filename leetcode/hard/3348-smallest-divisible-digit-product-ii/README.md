@@ -54,9 +54,9 @@ No number greater than 11111 has the product of its digits divisible by 26.
 ## Solution
 
 **Language:** Java  
-**Runtime:** 24 ms (beats 42.86%)  
-**Memory:** 50.2 MB (beats 48.57%)  
-**Submitted:** 2026-08-07T09:06:47.471Z  
+**Runtime:** 23 ms (beats 57.14%)  
+**Memory:** 50.5 MB (beats 42.86%)  
+**Submitted:** 2026-08-07T10:02:52.596Z  
 
 ```java
 class Solution {
