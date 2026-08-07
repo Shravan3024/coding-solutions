@@ -57,8 +57,8 @@ merged: a p b q c   d
 
 **Language:** Java  
 **Runtime:** 1 ms (beats 96.06%)  
-**Memory:** 43.3 MB (beats 33.71%)  
-**Submitted:** 2026-08-07T11:26:21.977Z  
+**Memory:** 43.1 MB (beats 63.57%)  
+**Submitted:** 2026-08-07T11:26:38.200Z  
 
 ```java
 class Solution {
