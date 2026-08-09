@@ -45,38 +45,41 @@ So we return 10 since it's larger.
 ## Solution
 
 **Language:** Java  
-**Runtime:** 3 ms (beats 90.90%)  
-**Memory:** 44.1 MB (beats 88.69%)  
-**Submitted:** 2026-08-09T18:18:35.550Z  
+**Runtime:** 8 ms (beats 57.44%)  
+**Memory:** 44 MB (beats 94.58%)  
+**Submitted:** 2026-08-09T18:17:54.440Z  
 
 ```java
 class Solution {
     public int stoneGameII(int[] piles) {
         int n = piles.length;
-        int[] suffixSum = new int[n];
-        suffixSum[n - 1] = piles[n - 1];
-        for (int i = n - 2; i >= 0; i--) {
-            suffixSum[i] = suffixSum[i + 1] + piles[i];
+
+        int[] suffix = new int[n + 1];
+
+        for (int i = n - 1; i >= 0; i--) {
+            suffix[i] = suffix[i + 1] + piles[i];
         }
 
-        int[][] memo = new int[n][n + 1];
-        return dfs(piles, suffixSum, 0, 1, memo);
-    }
+        int[][] dp = new int[n][n + 1];
 
-    private int dfs(int[] piles, int[] suffixSum, int i, int M, int[][] memo) {
-        if (i >= piles.length) return 0;
-        if (i + 2 * M >= piles.length) return suffixSum[i];
-        if (memo[i][M] != 0) return memo[i][M];
+        for (int i = n - 1; i >= 0; i--) {
+            for (int m = 1; m <= n; m++) {
 
-        int maxStones = 0;
-        for (int X = 1; X <= 2 * M; X++) {
-            int nextM = Math.max(M, X);
-            int opponentStones = dfs(piles, suffixSum, i + X, nextM, memo);
-            maxStones = Math.max(maxStones, suffixSum[i] - opponentStones);
+                if (i + 2 * m >= n) {
+                    dp[i][m] = suffix[i];
+                    continue;
+                }
+
+                for (int x = 1; x <= 2 * m; x++) {
+                    dp[i][m] = Math.max(
+                        dp[i][m],
+                        suffix[i] - dp[i + x][Math.max(m, x)]
+                    );
+                }
+            }
         }
 
-        memo[i][M] = maxStones;
-        return maxStones;
+        return dp[0][1];
     }
 }
 ```
