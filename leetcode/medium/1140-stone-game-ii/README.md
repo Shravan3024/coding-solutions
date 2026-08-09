@@ -45,81 +45,38 @@ So we return 10 since it's larger.
 ## Solution
 
 **Language:** Java  
-**Runtime:** 6 ms (beats 62.68%)  
-**Memory:** 46.3 MB (beats 29.87%)  
-**Submitted:** 2026-08-09T18:17:39.973Z  
+**Runtime:** 3 ms (beats 90.90%)  
+**Memory:** 44.1 MB (beats 88.69%)  
+**Submitted:** 2026-08-09T18:18:35.550Z  
 
 ```java
 class Solution {
     public int stoneGameII(int[] piles) {
         int n = piles.length;
-
-        // suffix[i] = sum from i to n-1
-        int[] suffix = new int[n + 1];
-
-        for (int i = n - 1; i >= 0; i--) {
-            suffix[i] = suffix[i + 1] + piles[i];
+        int[] suffixSum = new int[n];
+        suffixSum[n - 1] = piles[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            suffixSum[i] = suffixSum[i + 1] + piles[i];
         }
 
-        int[][] dp = new int[n + 1][n + 1];
+        int[][] memo = new int[n][n + 1];
+        return dfs(piles, suffixSum, 0, 1, memo);
+    }
 
-        /*
-         * best1[i][m]:
-         * min(dp[i+x][m]) for 1 <= x <= m
-         *
-         * best2[i][m]:
-         * min(dp[i+x][x]) for m < x <= 2m
-         */
+    private int dfs(int[] piles, int[] suffixSum, int i, int M, int[][] memo) {
+        if (i >= piles.length) return 0;
+        if (i + 2 * M >= piles.length) return suffixSum[i];
+        if (memo[i][M] != 0) return memo[i][M];
 
-        int[][] best1 = new int[n + 1][n + 1];
-        int[][] best2 = new int[n + 1][n + 1];
-
-        for (int i = n; i >= 0; i--) {
-
-            for (int m = n; m >= 1; m--) {
-
-                if (i >= n) {
-                    dp[i][m] = 0;
-                    continue;
-                }
-
-                // Can take all remaining piles
-                if (i + 2 * m >= n) {
-                    dp[i][m] = suffix[i];
-                    continue;
-                }
-
-                int minOpponent = Integer.MAX_VALUE;
-
-                /*
-                 * X <= M
-                 *
-                 * dp[i+X][M]
-                 */
-                for (int x = 1; x <= m && i + x < n; x++) {
-                    minOpponent = Math.min(
-                        minOpponent,
-                        dp[i + x][m]
-                    );
-                }
-
-                /*
-                 * X > M
-                 *
-                 * dp[i+X][X]
-                 */
-                for (int x = m + 1; x <= 2 * m && i + x < n; x++) {
-                    minOpponent = Math.min(
-                        minOpponent,
-                        dp[i + x][x]
-                    );
-                }
-
-                dp[i][m] = suffix[i] - minOpponent;
-            }
+        int maxStones = 0;
+        for (int X = 1; X <= 2 * M; X++) {
+            int nextM = Math.max(M, X);
+            int opponentStones = dfs(piles, suffixSum, i + X, nextM, memo);
+            maxStones = Math.max(maxStones, suffixSum[i] - opponentStones);
         }
 
-        return dp[0][1];
+        memo[i][M] = maxStones;
+        return maxStones;
     }
 }
 ```
