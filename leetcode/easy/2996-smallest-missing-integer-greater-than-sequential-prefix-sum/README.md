@@ -40,35 +40,42 @@ Explanation: The longest sequential prefix of nums is [3,4,5] with a sum of 12. 
 ## Solution
 
 **Language:** Java  
-**Runtime:** 1 ms (beats 93.72%)  
-**Memory:** 44.3 MB (beats 23.29%)  
-**Submitted:** 2026-08-11T17:39:39.276Z  
+**Runtime:** 0 ms (beats 100.00%)  
+**Memory:** 44 MB (beats 77.96%)  
+**Submitted:** 2026-08-11T17:41:02.236Z  
 
 ```java
 class Solution {
     public int missingInteger(int[] nums) {
+
         int sum = nums[0];
 
-        for(int i = 1; i < nums.length; i++){
-            if(nums[i] == nums[i - 1] + 1){
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1] + 1) {
                 sum += nums[i];
-            }else{
+            } else {
                 break;
             }
         }
-        
-        java.util.HashSet<Integer> seen = new java.util.HashSet<>();
 
-        for(int num : nums){
-            seen.add(num);
+        int x = sum;
+
+        while (true) {
+            boolean found = false;
+
+            for (int num : nums) {
+                if (num == x) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                return x;
+            }
+
+            x++;
         }
-
-        int answer = sum;
-
-        while(seen.contains(answer)){
-            answer++;
-        }
-        return answer;
     }
 }
 ```
