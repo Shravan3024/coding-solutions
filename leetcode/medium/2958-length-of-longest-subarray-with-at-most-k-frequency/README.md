@@ -57,37 +57,37 @@ It can be shown that there are no good subarrays with length more than 4.
 ## Solution
 
 **Language:** Java  
-**Runtime:** 68 ms (beats 50.38%)  
-**Memory:** 101.7 MB (beats 13.05%)  
-**Submitted:** 2026-08-12T10:08:40.204Z  
+**Runtime:** 67 ms (beats 59.25%)  
+**Memory:** 88.9 MB (beats 56.07%)  
+**Submitted:** 2026-08-12T10:08:56.132Z  
 
 ```java
 class Solution {
     public int maxSubarrayLength(int[] nums, int k) {
 
-        HashMap<Integer, Integer> map = new HashMap<>();
+        HashMap<Integer, Integer> freq = new HashMap<>();
 
         int left = 0;
-        int max = 0;
+        int ans = 0;
 
         for (int right = 0; right < nums.length; right++) {
 
-            int num = nums[right];
+            int x = nums[right];
 
-            map.put(num, map.getOrDefault(num, 0) + 1);
+            freq.put(x, freq.getOrDefault(x, 0) + 1);
 
-            while (map.get(num) > k) {
-                int remove = nums[left];
+            while (freq.get(x) > k) {
+                int leftValue = nums[left];
 
-                map.put(remove, map.get(remove) - 1);
+                freq.put(leftValue, freq.get(leftValue) - 1);
 
                 left++;
             }
 
-            max = Math.max(max, right - left + 1);
+            ans = Math.max(ans, right - left + 1);
         }
 
-        return max;
+        return ans;
     }
 }
 ```
