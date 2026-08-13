@@ -45,8 +45,8 @@ Given two strings `str1` and `str2`, return  *the largest string* `x` *such that
 
 **Language:** Java  
 **Runtime:** 1 ms (beats 94.81%)  
-**Memory:** 43.5 MB (beats 59.24%)  
-**Submitted:** 2026-08-13T09:54:54.851Z  
+**Memory:** 43.4 MB (beats 88.20%)  
+**Submitted:** 2026-08-13T09:55:04.365Z  
 
 ```java
 class Solution {
