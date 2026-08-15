@@ -38,9 +38,9 @@ The following substring has a length of 2 and contains at most two occurrences o
 ## Solution
 
 **Language:** Java  
-**Runtime:** 3 ms (beats 42.10%)  
-**Memory:** 43.9 MB (beats 46.32%)  
-**Submitted:** 2026-08-15T11:48:14.108Z  
+**Runtime:** 2 ms (beats 53.81%)  
+**Memory:** 44 MB (beats 37.06%)  
+**Submitted:** 2026-08-15T11:54:34.230Z  
 
 ```java
 class Solution {
